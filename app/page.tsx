@@ -9,38 +9,38 @@ const clear = 'AC'
 const toggle = '+/-'
 const percent = '%'
 const decimal = '.'
-const display = '0'
-const zero = '0'
+const zero = 0
+let calculation = 0
 
 export default function Home() {
-  const [display, setDisplay] = useState('0');
-  const [previous, setPrevious] = useState(null);
-  const [operator, setOperator] = useState(null);
+  const [display, setDisplay] = useState('0')
 
   function handleDigit(digit: number) {
-    if (display === '0') {
-      setDisplay(String(digit))
-    } else {
-      setDisplay(display + digit);
-    }
+    console.log(digit)
   }
 
-  function handleOperator(nextOperator: string) {
-    if (operator !== null) {
-      handleEquals();
-    }
-    setPrevious(display);
-    setOperator(nextOperator);
-    setDisplay('0');
+  function handleOperator(operator: string) {
+    console.log(operator)
   }
 
   function handleEquals() {
-    if (previous !== null && operator !== null) {
-      const result = calculate(parseFloat(previous), parseFloat(display), operator);
-      setDisplay(String(result));
-      setPrevious(null);
-      setOperator(null);
-    }
+    console.log('=')
+  }
+
+  function handleClear() {
+    console.log('AC')
+  }
+
+  function handleToggle() {
+    console.log('+/-')
+  }
+
+  function handlePercent() {
+    console.log('%')
+  }
+
+  function handleDecimal() {
+    console.log('.')
   }
 
   function add(a: number, b: number) {
@@ -79,14 +79,14 @@ export default function Home() {
         <div className="grid grid-cols-12">
           {/* display response */}
           <div className='col-span-12'>
-            <p className="p-8 text-2xl font-semibold">{display}</p>
+            <p className="p-8 text-2xl font-semibold text-zinc-600">{display}</p>
           </div>
           {/* function buttons */}
           <div className='col-span-9'>
             <div className="grid grid-cols-3">
-              <button className="btn-function">{clear}</button>
-              <button className="btn-function">{toggle}</button>
-              <button className="btn-function">{percent}</button>
+              <button className="btn-function" onClick={handleClear}>{clear}</button>
+              <button className="btn-function" onClick={handleToggle}>{toggle}</button>
+              <button className="btn-function" onClick={handlePercent}>{percent}</button>
             </div>
           </div>
           {/* operators */}
@@ -106,9 +106,9 @@ export default function Home() {
           {/* equals */}
         </div>
         <div className="grid grid-cols-12 items-center">
-          <div className="btn-equals col-span-3 rounded-bl-md">{decimal}</div>
+          <div className="btn-equals col-span-3 rounded-bl-md" onClick={handleDecimal}>{decimal}</div>
           <div className="btn-equals col-span-3" onClick={() => handleDigit(0)}>{zero}</div>
-          <div className="btn-equals col-span-6 rounded-br-md" onClick={() => handleEquals}>{equals}</div>
+          <div className="btn-equals col-span-6 rounded-br-md" onClick={() => handleEquals()}>{equals}</div>
         </div>
       </div>
       <footer className='text-center font-thin pt-16 text-zinc-100'>
