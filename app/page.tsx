@@ -71,11 +71,11 @@ export default function Home() {
   }
 
   return (
-    <main className='bg-zinc-800 h-screen'>
+    <main className='bg-zinc-800 h-screen py-16'>
       <div>
-        <h1 className='text-4xl text-center font-bold py-8 text-zinc-200'>The Odin Project: Calculator</h1>
+        <h1 className='text-4xl text-center font-bold py-8 text-zinc-200'>Calculator</h1>
       </div>
-      <div className='mx-auto container max-w-lg text-center rounded-md bg-zinc-300'>
+      <div className='mx-auto container max-w-lg text-center rounded-md bg-zinc-300 shadow-xl'>
         <div className="grid grid-cols-12">
           {/* display response */}
           <div className='col-span-12'>
