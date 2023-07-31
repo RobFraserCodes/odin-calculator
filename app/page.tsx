@@ -71,7 +71,7 @@ export default function Home() {
   }
 
   return (
-    <main className='bg-zinc-800 h-screen py-16'>
+    <main className='bg-zinc-800 h-screen'>
       <div>
         <h1 className='text-4xl text-center font-bold py-8 text-zinc-200'>Calculator</h1>
       </div>
@@ -111,7 +111,7 @@ export default function Home() {
           <div className="btn-equals col-span-6 rounded-br-md" onClick={() => handleEquals}>{equals}</div>
         </div>
       </div>
-      <footer className='text-center font-thin mt-16 text-zinc-100'>
+      <footer className='text-center font-thin pt-16 text-zinc-100'>
         <p>Created by <a href="www.robfraser.dev"><span className='font-semibold'>Rob Fraser</span> </a>
         as part of the <a href="https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript/lessons/rock-paper-scissors"><span className='font-semibold'>Odin Project</span></a>
         </p>
