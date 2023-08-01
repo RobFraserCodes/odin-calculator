@@ -1,46 +1,78 @@
 'use client'
 
+import { set } from '@project-serum/anchor/dist/cjs/utils/features'
 import { useState } from 'react'
 
 const digits = [7, 8, 9, 4, 5, 6, 1, 2, 3]
 const operators = ['+', '-', '*', '/']
-const equals = '='
 const clear = 'AC'
 const toggle = '+/-'
 const percent = '%'
 const decimal = '.'
 const zero = 0
-let calculation = 0
 
 export default function Home() {
   const [display, setDisplay] = useState('0')
+  const [previous, setPrevious] = useState([])
+  const [operator, setOperator] = useState('')
+  const [result, setResult] = useState(0)
+  let [calculation, setCalculation] = useState([])
+
+  function setDisplayValue(value: Array<number>) {
+    let newValue = value.join('')
+    setDisplay(newValue.toString())
+  }
 
   function handleDigit(digit: number) {
     console.log(digit)
+    previous.push(digit)
+    setPrevious(previous)
+    setDisplayValue(previous)
   }
 
   function handleOperator(operator: string) {
-    console.log(operator)
+    if (previous.length > 0) {
+      calculation.push(parseInt(previous.join('')))
+      calculation.push(operator)
+      setCalculation(calculation)
+      setPrevious([])
+      setOperator(operator)
+    }
   }
 
   function handleEquals() {
-    console.log('=')
+    if (previous.length > 0) {
+      calculation.push(parseInt(previous.join('')))
+      setCalculation(calculation)
+      setPrevious([])
+      setResult(calculate(calculation[0], calculation[2], calculation[1]))
+      setDisplay(result.toString())
+      setCalculation([])
+      setPrevious([])
+      setOperator('')
+    }
   }
 
   function handleClear() {
-    console.log('AC')
+    setPrevious([])
+    setOperator('')
+    setCalculation([])
+    setDisplay('0')
   }
 
   function handleToggle() {
     console.log('+/-')
+    setDisplay('+/-')
   }
 
   function handlePercent() {
     console.log('%')
+    setDisplay('%')
   }
 
   function handleDecimal() {
     console.log('.')
+    setDisplay('.')
   }
 
   function add(a: number, b: number) {
@@ -108,7 +140,7 @@ export default function Home() {
         <div className="grid grid-cols-12 items-center">
           <div className="btn-equals col-span-3 rounded-bl-md" onClick={handleDecimal}>{decimal}</div>
           <div className="btn-equals col-span-3" onClick={() => handleDigit(0)}>{zero}</div>
-          <div className="btn-equals col-span-6 rounded-br-md" onClick={() => handleEquals()}>{equals}</div>
+          <div className="btn-equals col-span-6 rounded-br-md" onClick={() => handleEquals()}>=</div>
         </div>
       </div>
       <footer className='text-center font-thin pt-16 text-zinc-100'>
