@@ -12,10 +12,10 @@ const zero = 0
 
 export default function Home() {
   const [display, setDisplay] = useState('0')
-  let [previous, setPrevious] = useState([])
+  const [previous, setPrevious] = useState([])
   const [operator, setOperator] = useState('')
   const [result, setResult] = useState(0)
-  let [calculation, setCalculation] = useState([])
+  const [calculation, setCalculation] = useState([])
 
   function setDisplayValue(value: Array<number>) {
     let newValue = value.join('')
@@ -23,7 +23,6 @@ export default function Home() {
   }
 
   function handleDigit(digit: number) {
-    console.log(digit)
     previous.push(digit)
     setPrevious(previous)
     setDisplayValue(previous)
@@ -45,7 +44,6 @@ export default function Home() {
       setCalculation(calculation)
       setPrevious([])
       const result = calculate(calculation[0], calculation[2], calculation[1])
-      console.log(result)
       setDisplay(result.toString())
       setCalculation([])
       setPrevious([])
