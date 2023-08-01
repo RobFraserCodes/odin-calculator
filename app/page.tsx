@@ -1,6 +1,5 @@
 'use client'
 
-import { set } from '@project-serum/anchor/dist/cjs/utils/features'
 import { useState } from 'react'
 
 const digits = [7, 8, 9, 4, 5, 6, 1, 2, 3]
@@ -13,7 +12,7 @@ const zero = 0
 
 export default function Home() {
   const [display, setDisplay] = useState('0')
-  const [previous, setPrevious] = useState([])
+  let [previous, setPrevious] = useState([])
   const [operator, setOperator] = useState('')
   const [result, setResult] = useState(0)
   let [calculation, setCalculation] = useState([])
@@ -42,10 +41,11 @@ export default function Home() {
 
   function handleEquals() {
     if (previous.length > 0) {
-      calculation.push(parseInt(previous.join('')))
+      calculation.push(parseFloat(previous.join('')))
       setCalculation(calculation)
       setPrevious([])
-      setResult(calculate(calculation[0], calculation[2], calculation[1]))
+      const result = calculate(calculation[0], calculation[2], calculation[1])
+      console.log(result)
       setDisplay(result.toString())
       setCalculation([])
       setPrevious([])
