@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useEffect } from 'react'
 
 const digits = [7, 8, 9, 4, 5, 6, 1, 2, 3]
 const operators = ['+', '-', '*', '/']
@@ -88,10 +89,46 @@ export default function Home() {
     }
   }
 
-  console.log(previousNumber, operator, currentNumber )
+  function handleKeyPress(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === '0') {
+      handleDigit(0)
+    } else if (e.key === '1') {
+      handleDigit(1)
+    } else if (e.key === '2') {
+      handleDigit(2)
+    } else if (e.key === '3') {
+      handleDigit(3)
+    } else if (e.key === '4') {
+      handleDigit(4)
+    } else if (e.key === '5') {
+      handleDigit(5)
+    } else if (e.key === '6') {
+      handleDigit(6)
+    } else if (e.key === '7') {
+      handleDigit(7)
+    } else if (e.key === '8') {
+      handleDigit(8)
+    } else if (e.key === '9') {
+      handleDigit(9)
+    } else if (e.key === '.') {
+      handleDecimal()
+    } else if (e.key === '+') {
+      handleOperator('+')
+    } else if (e.key === '-') {
+      handleOperator('-')
+    } else if (e.key === '*') {
+      handleOperator('*')
+    } else if (e.key === '/') {
+      handleOperator('/')
+    } else if (e.key === 'Enter') {
+      handleEquals()
+    } else if (e.key === 'Backspace') {
+      handleClear()
+    }
+  }
 
   return (
-    <main className='bg-zinc-800 h-screen'>
+    <main className='bg-zinc-800 h-screen' >
       <div>
         <h1 className='text-4xl text-center font-bold py-8 text-zinc-200'>Calculator</h1>
       </div>
